@@ -15,6 +15,8 @@ var conection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(opt => 
     opt.UseMySql(conection, ServerVersion.AutoDetect(conection)));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
