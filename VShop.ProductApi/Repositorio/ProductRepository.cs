@@ -40,12 +40,12 @@ namespace VShop.ProductApi.Repositorio
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Include(c => c.Category).ToListAsync();
         }
 
         public async Task<Product> GetById(int Id)
         {
-            return await _context.Products.Where(p => p.Id == Id).FirstOrDefaultAsync();
+            return await _context.Products.Include(c => c.Category).Where(p => p.Id == Id).FirstOrDefaultAsync();
         }
 
         

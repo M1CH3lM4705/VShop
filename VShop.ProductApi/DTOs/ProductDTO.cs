@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace VShop.ProductApi.DTOs
 {
@@ -18,6 +19,9 @@ namespace VShop.ProductApi.DTOs
         [Range(1, 9999, ErrorMessage = "Tamanho mínimo é de {0} e máximo é de {1}")]
         public long Stock { get; set; }
         public string? ImageUrl { get; set; }
+
+        public string? CategoryName { get; set; }
+        [JsonIgnore]
         public CategoryDTO? Category { get; set; }
         public int CategoryId { get; set; }
     }
