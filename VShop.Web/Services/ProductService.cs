@@ -20,7 +20,7 @@ public class ProductService : IProductService
 
     public Task<ProductViewModel> CreateProduct(ProductViewModel productVM)
     {
-        throw new NotImplementedException();
+        
     }
     public Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
     {
