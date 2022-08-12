@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\VShop.ProductApi.csproj": {}
+    "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\VShop.ProductApi.csproj": {}
   },
   "projects": {
-    "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\VShop.ProductApi.csproj": {
+    "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\VShop.ProductApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\VShop.ProductApi.csproj",
+        "projectUniqueName": "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\VShop.ProductApi.csproj",
         "projectName": "VShop.ProductApi",
-        "projectPath": "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\VShop.ProductApi.csproj",
+        "projectPath": "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\VShop.ProductApi.csproj",
         "packagesPath": "C:\\Users\\00181123231\\.nuget\\packages\\",
-        "outputPath": "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\obj\\",
+        "outputPath": "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

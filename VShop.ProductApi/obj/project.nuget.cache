@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UrHR2W2g6B56ji2jQg4FVL6+vsbgOqDI0KUotHdXA+No1zaxiq5p6a7NYECdCVfmW69gemLh0GthaGm9o3mj8w==",
+  "dgSpecHash": "I2QczJQEfJ664DKhPvgj98SdZlbeWVb//t3WvN0Vch99ZnWZJNtBtpnBQRUhMSP6z3mte55yfwFyviFCpXYxZw==",
   "success": true,
-  "projectFilePath": "D:\\It'sMe\\Projetos\\VShop\\VShop.ProductApi\\VShop.ProductApi.csproj",
+  "projectFilePath": "D:\\It'sMe\\Projetos\\VShop\\Vshop.ProductApi\\VShop.ProductApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\00181123231\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\00181123231\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
