@@ -30,6 +30,18 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryServices, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddCors(opt => 
+{
+    opt.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:7175")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
+    );
+});
+
 
 var app = builder.Build();
 

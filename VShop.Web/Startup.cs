@@ -21,6 +21,7 @@ public class Startup : IStartUp
         });
 
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ICategoryService, CategoryService>();
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)

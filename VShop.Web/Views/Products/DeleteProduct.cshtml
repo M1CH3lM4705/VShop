@@ -1,0 +1,25 @@
+@model VShop.Web.Models.ProductViewModel
+
+<h2>Deletar Produto</h2>
+
+<h4>Tem certeza que deseja remover o produto @Model.Nome</h4>
+
+<div>
+    <hr />
+    <dl>
+        
+    </dl>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <img src="~/images/@Model.ImageUrl" />
+        </div>
+    </div>
+
+    <form asp-action="DeleteProduct">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group" style="padding-top: 10px">
+            <input type="submit" value="Deletar" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-info">Cancelar</a>
+        </div>
+    </form>
+</div>

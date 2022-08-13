@@ -31,7 +31,7 @@ namespace VShop.ProductApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("/categories")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAll()
         {
             var categoriesDto = await _categoriesService.GetCategories();

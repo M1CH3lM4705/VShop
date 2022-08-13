@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VShop.Web.Models;
 using VShop.Web.Services.Interfaces;
 
@@ -7,13 +8,14 @@ namespace VShop.Web.Controllers
     [Route("[controller]/[Action]")]
     public class ProductsController : Controller
     {
-        private readonly ILogger<ProductsController> _logger;
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductService productService)
+        public ProductsController(IProductService productService,
+                                  ICategoryService categoryService)
         {
-            _logger = logger;
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         public async Task<ActionResult<IEnumerable<ProductViewModel>>> Index()
@@ -24,13 +26,75 @@ namespace VShop.Web.Controllers
 
         public async Task<IActionResult> CreateProduct()
         {
+            await MontarSelectListDeCategorias();
+
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(ProductViewModel productVM)
         {
-            return View("Error!");
+            if(ModelState.IsValid)
+            {
+                var result = await _productService.CreateProduct(productVM);
+
+                if(result != null) return RedirectToAction(nameof(Index));
+            }
+            
+            await MontarSelectListDeCategorias();
+
+            return View(productVM);
+        }
+
+        public async Task<IActionResult> UpdateProduct(int id)
+        {
+            await MontarSelectListDeCategorias();
+
+            var result = await _productService.FindProductById(id);
+
+            if(result is null) return View("Error");
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(ProductViewModel productVM)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _productService.UpdateProduct(productVM);
+
+
+                if(result is not null)
+                    return RedirectToAction(nameof(Index));
+            }
+            return View(productVM);
+        }
+
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var result = await _productService.FindProductById(id);
+
+            if(result is null)
+                return View("Error");
+            
+            return View(result);
+        }
+
+        [HttpPost, ActionName("DeleteProduct")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _productService.DeleteProductById(id);
+
+            if(!result) return View("Error");
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task MontarSelectListDeCategorias()
+        {
+            ViewBag.CategoryId = new SelectList(await 
+                _categoryService.GetAllCategories(), "CategoryId", "Name");
         }
     }
 }
