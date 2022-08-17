@@ -1,5 +1,6 @@
 
 
+using VShop.Web.Configuration;
 using VShop.Web.Services;
 using VShop.Web.Services.Interfaces;
 
@@ -22,6 +23,8 @@ public class Startup : IStartUp
 
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICategoryService, CategoryService>();
+
+        services.AdicionarAuthentication(Configuration);
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -38,6 +41,7 @@ public class Startup : IStartUp
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

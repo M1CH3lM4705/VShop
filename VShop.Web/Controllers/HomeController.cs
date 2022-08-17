@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VShop.Web.Models;
 
@@ -18,6 +20,16 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize]
+    public async Task<IActionResult> Login()
+    {
+        var accesToken = await HttpContext.GetTokenAsync("access_token");
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Logout(){
+        return SignOut("Cookies", "oidc");
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

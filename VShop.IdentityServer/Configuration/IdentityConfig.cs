@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
@@ -10,7 +6,7 @@ namespace VShop.IdentityServer.Configuration
     public class IdentityConfig
     {
         public const string Admin = "Admin";
-        public const string Client = "Cliente";
+        public const string Client = "Client";
 
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -38,7 +34,7 @@ namespace VShop.IdentityServer.Configuration
                     ClientId = "client",
                     ClientSecrets = { new Secret("abacadabra#simsalabim".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "read", "write", "profiles"}
+                    AllowedScopes = { "read", "write", "profile"}
                 },
                 new Client
                 {

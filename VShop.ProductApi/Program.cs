@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using VShop.ProductApi.Configuration;
 using VShop.ProductApi.Context;
 using VShop.ProductApi.Repositorio;
 using VShop.ProductApi.Services;
@@ -13,10 +14,8 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "VShop", Description = "Teste", Version = "v1" });
-});
+
+builder.Services.AddSwagger();
 
 var conection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -42,6 +41,8 @@ builder.Services.AddCors(opt =>
     );
 });
 
+builder.Services.AdicionarAuthentication(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -59,6 +60,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors();
