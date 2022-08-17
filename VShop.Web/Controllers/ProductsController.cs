@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,7 +24,7 @@ namespace VShop.Web.Controllers
         public async Task<ActionResult<IEnumerable<ProductViewModel>>> Index()
         {
 
-            return View(await _productService.GetAllProducts());
+            return View(await _productService.GetAllProducts(await HttpContext.GetTokenAsync("access_token")));
         }
 
         public async Task<IActionResult> CreateProduct()
@@ -98,7 +99,7 @@ namespace VShop.Web.Controllers
         private async Task MontarSelectListDeCategorias()
         {
             ViewBag.CategoryId = new SelectList(await 
-                _categoryService.GetAllCategories(), "CategoryId", "Name");
+                _categoryService.GetAllCategories(await HttpContext.GetTokenAsync("access_token")), "CategoryId", "Name");
         }
     }
 }

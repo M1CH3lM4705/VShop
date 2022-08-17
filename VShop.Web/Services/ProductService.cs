@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using VShop.Web.Models;
@@ -86,10 +87,10 @@ public class ProductService : IProductService
         return productVM;
     }
 
-    public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
+    public async Task<IEnumerable<ProductViewModel>> GetAllProducts(string token)
     {
         var client = _clientFactory.CreateClient("ProductApi");
-
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         using(var response = await client.GetAsync(apiEndpoint))
         {
             if(response.IsSuccessStatusCode)
