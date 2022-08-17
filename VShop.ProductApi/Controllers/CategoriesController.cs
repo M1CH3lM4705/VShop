@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VShop.Core.Utils;
 using VShop.ProductApi.DTOs;
 using VShop.ProductApi.Services;
 
@@ -77,7 +78,7 @@ namespace VShop.ProductApi.Controllers
             return Ok(categoryDTO);
         }
 
-        [HttpDelete("{id:int}"), Authorize]
+        [HttpDelete("{id:int}"), Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<CategoryDTO>> Delete(int id)
         {
             var categoryDTO = await _categoriesService.GetCategoryById(id);

@@ -1,23 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.ProductApi", "VShop.ProductApi\VShop.ProductApi.csproj", "{A1E2BF03-7BFF-459B-AEEF-72833446C34E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VShop.ProductApi", "VShop.ProductApi\VShop.ProductApi.csproj", "{A1E2BF03-7BFF-459B-AEEF-72833446C34E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.Web", "VShop.Web\VShop.Web.csproj", "{59303EE3-F5BB-4C37-907B-77B2B637E45D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VShop.Web", "VShop.Web\VShop.Web.csproj", "{59303EE3-F5BB-4C37-907B-77B2B637E45D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.IdentityServer", "VShop.IdentityServer\VShop.IdentityServer.csproj", "{C9CF167D-6B34-462F-87DB-9B1947764676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VShop.IdentityServer", "VShop.IdentityServer\VShop.IdentityServer.csproj", "{C9CF167D-6B34-462F-87DB-9B1947764676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.Core", "VShop.Core\VShop.Core.csproj", "{BF52CD47-AF76-4107-81C2-76AD2F6C2F8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VShop.Core", "VShop.Core\VShop.Core.csproj", "{BF52CD47-AF76-4107-81C2-76AD2F6C2F8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{C1F3FCEA-50DD-4A21-A953-6B30CECBC0D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiServices", "ApiServices", "{4C8D76C5-4969-4D90-B9C6-F620C71D0B42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{DBA1853E-07EF-48B7-A55A-0E57575BADAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A1E2BF03-7BFF-459B-AEEF-72833446C34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +39,16 @@ Global
 		{BF52CD47-AF76-4107-81C2-76AD2F6C2F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF52CD47-AF76-4107-81C2-76AD2F6C2F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF52CD47-AF76-4107-81C2-76AD2F6C2F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1E2BF03-7BFF-459B-AEEF-72833446C34E} = {4C8D76C5-4969-4D90-B9C6-F620C71D0B42}
+		{59303EE3-F5BB-4C37-907B-77B2B637E45D} = {DBA1853E-07EF-48B7-A55A-0E57575BADAD}
+		{C9CF167D-6B34-462F-87DB-9B1947764676} = {C1F3FCEA-50DD-4A21-A953-6B30CECBC0D8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4459398-E326-4F90-9105-1F124EB1325C}
 	EndGlobalSection
 EndGlobal

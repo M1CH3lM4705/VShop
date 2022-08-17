@@ -41,8 +41,8 @@ namespace VShop.IdentityServer.Configuration
                     ClientId = "vshop",
                     ClientSecrets = { new Secret("abacadabra#simsalabim".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = {"https://localhost:7218/signin-oidc"},
-                    PostLogoutRedirectUris = {"https://localhost:7218/signout-callback-oidc"},
+                    RedirectUris = {"https://localhost:7175/signin-oidc"},
+                    PostLogoutRedirectUris = {"https://localhost:7175/signout-callback-oidc"},
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
