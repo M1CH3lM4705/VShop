@@ -7,7 +7,7 @@ using VShop.Web.Services.Interfaces;
 
 namespace VShop.Web.Controllers
 {
-    [Route("[controller]/[Action]")]
+    [Route("[controller]/[Action]"), Authorize(Roles = Role.Admin)]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -34,7 +34,6 @@ namespace VShop.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CreateProduct(ProductViewModel productVM)
         {
             if(ModelState.IsValid)
@@ -60,7 +59,7 @@ namespace VShop.Web.Controllers
             return View(result);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         public async Task<IActionResult> UpdateProduct(ProductViewModel productVM)
         {
             if(ModelState.IsValid)
@@ -74,7 +73,6 @@ namespace VShop.Web.Controllers
             return View(productVM);
         }
 
-        [Authorize]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var result = await _productService.FindProductById(id);
@@ -85,7 +83,7 @@ namespace VShop.Web.Controllers
             return View(result);
         }
 
-        [HttpPost, ActionName("DeleteProduct"), Authorize(Roles = Role.Admin)]
+        [HttpPost, ActionName("DeleteProduct")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _productService.DeleteProductById(id);

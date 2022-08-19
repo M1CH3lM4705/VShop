@@ -8,7 +8,6 @@ namespace VShop.ProductApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -38,7 +37,7 @@ namespace VShop.ProductApi.Controllers
             return Ok(productDto);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = Role.Admin)]
         public async Task<ActionResult> Post([FromBody] ProductDTO productDTO)
         {
             if(!ModelState.IsValid) return BadRequest();
@@ -48,7 +47,7 @@ namespace VShop.ProductApi.Controllers
             return new CreatedAtRouteResult("GetProduct", new {id = productDTO.Id}, productDTO);
         }
 
-        [HttpPut()]
+        [HttpPut, Authorize(Roles = Role.Admin)]
         public async Task<IActionResult> Put([FromBody] ProductDTO productDTO)
         {
             
