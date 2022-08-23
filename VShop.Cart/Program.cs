@@ -1,18 +1,15 @@
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using VShop.Cart.Configuration;
+using VShop.Cart.Context;
+using VShop.Cart.Repositories;
 using VShop.Core.Configuration;
-using VShop.ProductApi.Configuration;
-using VShop.ProductApi.Context;
-using VShop.ProductApi.Repositorio;
-using VShop.ProductApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(x => 
-    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwagger();
@@ -22,27 +19,23 @@ var conection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseMySql(conection, ServerVersion.AutoDetect(conection)));
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ICategoryServices, CategoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 builder.Services.AddCors(opt => 
 {
-    opt.AddDefaultPolicy(
+    opt.AddPolicy("CorsPolicy",
         builder =>
         {
-            builder.WithOrigins("https://localhost:7175")
+            builder.AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         }
     );
 });
 
-builder.Services.AdicionarAuthentication(builder.Configuration);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AdicionarAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
@@ -64,6 +57,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors();
+
 
 app.MapControllers();
 

@@ -8,17 +8,9 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = VShop.ProductApi
 build_property.RootNamespace = VShop.ProductApi
-<<<<<<< HEAD
-build_property.ProjectDir = D:\It'sMe\Projetos\VShop\VShop.ProductApi\
-build_property.RazorLangVersion = 6.0
-build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\It'sMe\Projetos\VShop\VShop.ProductApi
-=======
 build_property.ProjectDir = d:\DEV\Projetos\VShop\VShop.ProductApi\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = d:\DEV\Projetos\VShop\VShop.ProductApi
->>>>>>> vshop-web-ref
 build_property._RazorSourceGeneratorDebug = 

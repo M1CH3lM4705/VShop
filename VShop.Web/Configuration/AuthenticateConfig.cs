@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace VShop.Web.Configuration;
 
@@ -12,9 +14,27 @@ public static class AuthenticateConfig
             options.DefaultScheme = "Cookies";
             options.DefaultChallengeScheme = "oidc";
         })
-            .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+            .AddCookie("Cookies", c => {
+                c.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                c.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToAccessDenied = (context) => 
+                    {
+                        context.HttpContext.Response.Redirect(configuration["ServicesUri:IdentityServer"] + "/Account/AccessDenied");
+                        return Task.CompletedTask;
+                    }  
+                };
+            })
             .AddOpenIdConnect("oidc", options =>
             {
+                options.Events.OnRemoteFailure = context =>
+                {
+                    context.Response.Redirect("/");
+                    context.HandleResponse();
+
+                    return Task.FromResult(0);
+                };
+                
                 options.Authority = configuration["ServicesUri:IdentityServer"];
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.ClientId = "vshop";

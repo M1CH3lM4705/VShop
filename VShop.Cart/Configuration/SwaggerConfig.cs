@@ -1,13 +1,13 @@
 using Microsoft.OpenApi.Models;
 
-namespace VShop.ProductApi.Configuration;
+namespace VShop.Cart.Configuration;
 
 public static class SwaggerConfig
 {
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>{
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "VShop Api Catalogo", Description = "Teste", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "VShop Api Carrinho", Description = "Teste", Version = "v1" });
 
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {

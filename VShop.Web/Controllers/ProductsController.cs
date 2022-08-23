@@ -24,8 +24,10 @@ namespace VShop.Web.Controllers
         public async Task<ActionResult<IEnumerable<ProductViewModel>>> Index()
         {
 
-            return View(await _productService.GetAllProducts(await HttpContext.GetTokenAsync("access_token")));
+            return base.View(await _productService.GetAllProducts(await GetToken()));
         }
+
+        
 
         public async Task<IActionResult> CreateProduct()
         {
@@ -53,7 +55,7 @@ namespace VShop.Web.Controllers
         {
             await MontarSelectListDeCategorias();
 
-            var result = await _productService.FindProductById(id);
+            var result = await _productService.FindProductById(id, await GetToken());
 
             if(result is null) return View("Error");
 
@@ -76,7 +78,7 @@ namespace VShop.Web.Controllers
 
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var result = await _productService.FindProductById(id);
+            var result = await _productService.FindProductById(id, await GetToken());
 
             if(result is null)
                 return View("Error");
@@ -97,7 +99,12 @@ namespace VShop.Web.Controllers
         private async Task MontarSelectListDeCategorias()
         {
             ViewBag.CategoryId = new SelectList(await 
-                _categoryService.GetAllCategories(await HttpContext.GetTokenAsync("access_token")), "CategoryId", "Name");
+                _categoryService.GetAllCategories(await GetToken()), "CategoryId", "Name");
+        }
+
+        private async Task<string> GetToken()
+        {
+            return await HttpContext.GetTokenAsync("access_token");
         }
     }
 }

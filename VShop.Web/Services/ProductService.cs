@@ -66,10 +66,11 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductViewModel> FindProductById(int id)
+    public async Task<ProductViewModel> FindProductById(int id, string token)
     {
         var client = _clientFactory.CreateClient("ProductApi");
-
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        
         using(var response = await client.GetAsync(apiEndpoint + id))
         {
             if(response.IsSuccessStatusCode)
