@@ -15,7 +15,7 @@ public static class DependencyInjectionConfig
         services.AddHttpClient<IProductService, ProductService>("ProductApi", c =>
         {
             c.BaseAddress = new Uri(configuration["ServicesUri:ProductApi"]);
-            c.DefaultRequestHeaders.Add("Connection", "Keep Alive");
+            c.DefaultRequestHeaders.Add("Connection", "Keep-Alive");
             c.DefaultRequestHeaders.Add("Keep-Alive", "3600");
             c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-ProductApi");
         }).AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>();
@@ -25,7 +25,7 @@ public static class DependencyInjectionConfig
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>();;
 
         services.AddScoped<ICategoryService, CategoryService>();
-        // services.AddScoped<IProductService, ProductService>();
+         services.AddScoped<IProductService, ProductService>();
         // services.AddScoped<ICartService, CartService>();
 
         return services;

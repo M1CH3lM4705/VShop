@@ -10,10 +10,11 @@ namespace VShop.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly IProductService _productService;
-
-    public HomeController(IProductService productService)
+    private readonly ICartService _cartService;
+    public HomeController(IProductService productService, ICartService cartService)
     {
         _productService = productService;
+        _cartService = cartService;
     }
 
     public async Task<IActionResult> Index()
@@ -24,14 +25,47 @@ public class HomeController : Controller
 
     }
 
+    [Authorize]
     public async Task<ActionResult<ProductViewModel>> ProductDetails(int id)
     {
-        var product = await _productService.FindProductById(id, string.Empty);
+        var product = await _productService.FindProductById(id);
 
         if(product is null) return View("Error");
 
         return View(product);
     }
+
+    [HttpPost, ActionName("ProductDetails"), Authorize]
+    public async Task<ActionResult<ProductViewModel>> ProductDetailsPost(ProductViewModel productVM)
+    {
+        if(!ModelState.IsValid) return View(productVM);
+
+        CartViewModel cart = new()
+        {
+            CartHeader = new CartHeaderViewModel
+            {
+                UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+            }
+        };
+
+        CartItemViewModel cartItem = new()
+        {
+            Quantity = productVM.Quantity,
+            ProductId = productVM.Id,
+            Product = await _productService.FindProductById(productVM.Id)
+        };
+
+        List<CartItemViewModel> cartItemsVM = new();
+        cartItemsVM.Add(cartItem);
+        cart.CartItems = cartItemsVM;
+
+        var result = await _cartService.AddItemToCartAsync(cart);
+
+        if(result is not null) return RedirectToAction(nameof(Index));
+
+        return View(productVM);
+    }
+
 
     [Authorize]
     public async Task<IActionResult> Login()

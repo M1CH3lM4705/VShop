@@ -55,7 +55,7 @@ namespace VShop.Web.Controllers
         {
             await MontarSelectListDeCategorias();
 
-            var result = await _productService.FindProductById(id, await GetToken());
+            var result = await _productService.FindProductById(id);
 
             if(result is null) return View("Error");
 
@@ -78,7 +78,7 @@ namespace VShop.Web.Controllers
 
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var result = await _productService.FindProductById(id, await GetToken());
+            var result = await _productService.FindProductById(id);
 
             if(result is null)
                 return View("Error");

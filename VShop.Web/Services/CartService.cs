@@ -22,7 +22,7 @@ public class CartService : BaseService, ICartService
 
         return await DeserializarObjetoResponse<CartViewModel>(result);
     }
-    public async Task<CartViewModel> AddItemToCartAsync(CartViewModel cartVM, string token)
+    public async Task<CartViewModel> AddItemToCartAsync(CartViewModel cartVM)
     {
         var client = _clientFactory.CreateClient("CartApi");
         
