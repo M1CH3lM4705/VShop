@@ -91,7 +91,7 @@ public class ProductService : IProductService
     public async Task<IEnumerable<ProductViewModel>> GetAllProducts(string token)
     {
         var client = _clientFactory.CreateClient("ProductApi");
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         using(var response = await client.GetAsync(apiEndpoint))
         {
             if(response.IsSuccessStatusCode)

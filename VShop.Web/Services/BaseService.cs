@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using VShop.Core.Communication;
 
 namespace VShop.Web.Services;
 
@@ -38,5 +39,10 @@ public abstract class BaseService
 
         response.EnsureSuccessStatusCode();
         return true;
+    }
+
+    public ResponseResult ReturnOK()
+    {
+        return new ResponseResult();
     }
 }

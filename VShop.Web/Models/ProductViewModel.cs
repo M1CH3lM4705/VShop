@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace VShop.Web.Models;
 
@@ -21,5 +19,7 @@ public class ProductViewModel
     [Required(ErrorMessage = "O campo {0} é obrigatorio."), Display(Name = "Imagem")]
     public string? ImageUrl { get; set; }
     public string? CategoryName { get; set; }
+    [Range(1, 100)]
+    public int Quantity { get; set; } = 1;
     public int CategoryId { get; set; }
 }

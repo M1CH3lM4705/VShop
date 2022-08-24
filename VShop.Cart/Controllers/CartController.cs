@@ -22,22 +22,38 @@ namespace VShop.Cart.Controllers
                             ArgumentNullException(nameof(repository));
         }
 
-        public async Task<ActionResult<CartDTO>> GetById()
+        [HttpGet("getcart/{id}")]
+        public async Task<ActionResult<CartDTO>> GetById(string id)
         {
-            return Ok();
+            var cart = await _repository.GetCartByUserIdAsync(id);
+            if(cart is null) return NotFound();
+            return Ok(cart);
         }
 
+        [HttpPost("addcart")]
         public async Task<ActionResult<CartDTO>> AddCart(CartDTO cartDTO)
         {
-            return Ok();
+            var cartDto = await _repository.UpdateCartAsync(cartDTO);
+
+            if(cartDTO is null) return NotFound();
+            return Ok(cartDTO);
         }
+
+        [HttpPut("updatecart")]
         public async Task<ActionResult<CartDTO>> UpdateCart(CartDTO cartDTO)
         {
-            return Ok();
+            var cartDto = await _repository.UpdateCartAsync(cartDTO);
+
+            if(cartDTO is null) return NotFound();
+            return Ok(cartDTO);
         }
+
+        [HttpDelete("deletecart/{id}")]
         public async Task<ActionResult<bool>> DeleteCart(int id)
         {
-            return Ok();
+            var status = await _repository.DeleteItemCartAsync(id);
+            if(!status) return BadRequest();
+            return Ok(status);
         }
     }
 }

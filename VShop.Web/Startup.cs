@@ -2,6 +2,7 @@
 
 using VShop.Web.Configuration;
 using VShop.Web.Services;
+using VShop.Web.Services.Handlers;
 using VShop.Web.Services.Interfaces;
 
 namespace VShop.Web;
@@ -16,13 +17,8 @@ public class Startup : IStartUp
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllersWithViews();
-        services.AddHttpClient("ProductApi", c =>
-        {
-            c.BaseAddress = new Uri(Configuration["ServicesUri:ProductApi"]);
-        });
 
-        services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddDependencyInjection(Configuration);
 
         services.AdicionarAuthentication(Configuration);
     }
