@@ -4,4 +4,12 @@ public class CartViewModel
 {
     public CartHeaderViewModel CartHeader { get; set; } = new();
     public IEnumerable<CartItemViewModel> CartItems { get; set; } = Enumerable.Empty<CartItemViewModel>();
+
+    internal void GetTotalAmount()
+    {
+        foreach(var item in CartItems)
+        {
+            CartHeader.TotalAmount += item.GetPriceItems();
+        }
+    }
 }

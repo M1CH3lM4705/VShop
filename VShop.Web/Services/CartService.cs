@@ -12,7 +12,7 @@ public class CartService : BaseService, ICartService
         _clientFactory = clientFactory;
     }
 
-    public async Task<CartViewModel> GetCartByUserIdAsync(string userId, string token)
+    public async Task<CartViewModel> GetCartByUserIdAsync(string userId)
     {
         var client = _clientFactory.CreateClient("CartApi");
 
@@ -36,7 +36,7 @@ public class CartService : BaseService, ICartService
     }
 
 
-    public async Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM, string token)
+    public async Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM)
     {
         var client = _clientFactory.CreateClient("CartApi");
         
@@ -48,7 +48,7 @@ public class CartService : BaseService, ICartService
 
         return null;
     }
-    public async Task<bool> RemoveItemFromCartAsync(int cartId, string token)
+    public async Task<bool> RemoveItemFromCartAsync(int cartId)
     {
         var client = _clientFactory.CreateClient("CartApi");
         

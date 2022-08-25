@@ -8,4 +8,9 @@ public class CartItemViewModel
     public int Quantity { get; set; }
     public int ProductId { get; set; }
     public int CartHeaderId { get; set; }
+
+    internal decimal GetPriceItems()
+    {
+        return Product.Price * Quantity;
+    }
 }

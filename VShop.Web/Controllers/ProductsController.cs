@@ -99,7 +99,7 @@ namespace VShop.Web.Controllers
         private async Task MontarSelectListDeCategorias()
         {
             ViewBag.CategoryId = new SelectList(await 
-                _categoryService.GetAllCategories(await GetToken()), "CategoryId", "Name");
+                _categoryService.GetAllCategories(), "CategoryId", "Name");
         }
 
         private async Task<string> GetToken()
