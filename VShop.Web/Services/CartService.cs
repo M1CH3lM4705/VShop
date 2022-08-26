@@ -28,7 +28,7 @@ public class CartService : BaseService, ICartService
         
         var content = ObterConteudo(cartVM);
 
-        var response = await client.PostAsync($"{apiEndpoint}/addcart", content);
+        var response = await client.PostAsync($"{apiEndpoint}/addcart/", content);
 
         if(!TratarErrosResponse(response)) return await DeserializarObjetoResponse<CartViewModel>(response);
 

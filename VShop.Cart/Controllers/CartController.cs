@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using VShop.Cart.DTOs;
 using VShop.Cart.Repositories;
 
@@ -12,6 +7,7 @@ namespace VShop.Cart.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize ]
     public class CartController : ControllerBase
     {
         private readonly ICartRepository _repository;
@@ -35,7 +31,7 @@ namespace VShop.Cart.Controllers
         {
             var cartDto = await _repository.UpdateCartAsync(cartDTO);
 
-            if(cartDTO is null) return NotFound();
+            if(cartDto is null) return NotFound();
             return Ok(cartDTO);
         }
 

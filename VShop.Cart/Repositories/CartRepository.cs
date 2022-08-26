@@ -96,16 +96,6 @@ public class CartRepository : ICartRepository
         if(cartHeader is null){
             await CreateHeaderAndItems(carrinho);
 
-            async Task CreateHeaderAndItems(Carrinho carrinho){
-                _context.CartHeaders.Add(carrinho.CartHeader);
-                await _context.SaveChangesAsync();
-
-                carrinho.CartItems.FirstOrDefault().CartHeaderId = carrinho.CartHeader.Id;
-                cart.CartItems.FirstOrDefault().Product = null;
-
-                _context.CartItems.Add(carrinho.CartItems.FirstOrDefault());
-                await _context.SaveChangesAsync();
-            }
         }
         else
         {
@@ -121,7 +111,7 @@ public class CartRepository : ICartRepository
             p => p.ProductId == cart.CartItems.FirstOrDefault()
                 .ProductId && p.CartHeaderId == cartHeader.Id);
         
-        if(carrinho is null)
+        if(cartDetail is null)
         {
             await CreateCartItems(carrinho, cartHeader);
         }
@@ -129,6 +119,26 @@ public class CartRepository : ICartRepository
         {
             await AddItemsAndUpdate(carrinho, cartDetail);
         }
+    }
+
+    private async Task CreateCartItems(Carrinho carrinho, CartHeader? cartHeader)
+    {
+        carrinho.CartItems.FirstOrDefault().CartHeaderId = cartHeader.Id;
+        carrinho.CartItems.FirstOrDefault().Product = null;
+        _context.CartItems.Add(carrinho.CartItems.First());
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task CreateHeaderAndItems(Carrinho carrinho)
+    {
+        _context.CartHeaders.Add(carrinho.CartHeader);
+        await _context.SaveChangesAsync();
+
+        carrinho.CartItems.FirstOrDefault().CartHeaderId = carrinho.CartHeader.Id;
+        carrinho.CartItems.FirstOrDefault().Product = null;
+
+        _context.CartItems.Add(carrinho.CartItems.FirstOrDefault());
+        await _context.SaveChangesAsync();
     }
 
     private async Task AddItemsAndUpdate(Carrinho carrinho, CartItem? cartDetail)
@@ -141,13 +151,6 @@ public class CartRepository : ICartRepository
         await _context.SaveChangesAsync();
     }
 
-    private async Task CreateCartItems(Carrinho carrinho, CartHeader? cartHeader)
-    {
-        carrinho.CartItems.FirstOrDefault().CartHeaderId = cartHeader.Id;
-        carrinho.CartItems.FirstOrDefault().Product = null;
-        _context.CartItems.Add(carrinho.CartItems.FirstOrDefault());
-        await _context.SaveChangesAsync();
-    }
 
     private async Task SaveProductInDataBase(CartDTO cart, Carrinho carrinho)
     {

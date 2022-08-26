@@ -19,6 +19,7 @@ public static class AuthConfig
                     ValidateAudience = false
                 };
             });
+            
         services.AddAuthorization(options =>
         {
             options.AddPolicy("ApiScope", policy =>
