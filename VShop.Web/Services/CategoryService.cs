@@ -1,5 +1,3 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
 using VShop.Web.Models;
 using VShop.Web.Services.Interfaces;
 
@@ -14,11 +12,10 @@ namespace VShop.Web.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<IEnumerable<CategoryViewModel>> GetAllCategories(string token)
+        public async Task<IEnumerable<CategoryViewModel>> GetAllCategories()
         {
             var client = _clientFactory.CreateClient("ProductApi");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
+            
             var response = await client.GetAsync(apiEndpoint);
 
             TratarErrosResponse(response);

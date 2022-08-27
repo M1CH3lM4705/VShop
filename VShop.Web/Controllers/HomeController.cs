@@ -19,9 +19,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View(await _productService.GetAllProducts(
-                string.Empty)
-            );
+        return View(await _productService.GetAllProducts());
 
     }
 
@@ -77,6 +75,7 @@ public class HomeController : Controller
     public IActionResult Logout(){
         return SignOut("Cookies", "oidc");
     }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

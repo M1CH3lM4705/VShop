@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{DBA1853E-07E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.Cart", "VShop.Cart\VShop.Cart.csproj", "{432578D7-9383-432B-BB55-874D8298D576}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VShop.DiscountApi", "VShop.DiscountApi\VShop.DiscountApi.csproj", "{439FD802-D242-4B14-8477-81D2747AAD0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{432578D7-9383-432B-BB55-874D8298D576}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432578D7-9383-432B-BB55-874D8298D576}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432578D7-9383-432B-BB55-874D8298D576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439FD802-D242-4B14-8477-81D2747AAD0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439FD802-D242-4B14-8477-81D2747AAD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439FD802-D242-4B14-8477-81D2747AAD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439FD802-D242-4B14-8477-81D2747AAD0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
