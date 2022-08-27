@@ -15,7 +15,7 @@ namespace VShop.Web.Services
         public async Task<IEnumerable<CategoryViewModel>> GetAllCategories()
         {
             var client = _clientFactory.CreateClient("ProductApi");
-            
+
             var response = await client.GetAsync(apiEndpoint);
 
             TratarErrosResponse(response);

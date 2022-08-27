@@ -9,9 +9,9 @@ public class MappingProfile : Profile
     {
         CreateMap<CartDTO, Carrinho>().ReverseMap();
 
-        CreateMap<CartHeaderDTO, CartHeaderDTO>().ReverseMap();
+        CreateMap<CartHeaderDTO, CartHeader>().ReverseMap();
 
-        CreateMap<CartItemDTO, CartItemDTO>().ReverseMap();
+        CreateMap<CartItemDTO, CartItem>().ReverseMap();
 
         CreateMap<ProductDTO, Product>().ReverseMap();
     }

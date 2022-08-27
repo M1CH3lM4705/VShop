@@ -14,7 +14,7 @@
             <p class="mb-4">@Model.Description</p>
             <p class="mb-4 text-black">
                 <b>
-                    <@Model.Price.ToString("C")&nbsp;(@Model.Stock items)
+                    @Model.Price.ToString("C")&nbsp;(@Model.Stock items)
                 </b>
             </p>
             <div class="row text-black">
@@ -27,7 +27,7 @@
                     <a asp-action="Index" class="btn btn-outline-info">Voltar</a>
                 </div>
                 <div class="col-5 col-md-5">
-                    <button type="submit" class="btn bnt-outline-success">Adiciona ao Carrinho</button>
+                    <button type="submit" class="btn btn-outline-success">Adiciona ao Carrinho</button>
                 </div>
             </div>
         </div>

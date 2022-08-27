@@ -1,4 +1,5 @@
 
+using VShop.Core.Usuario;
 using VShop.Web.Services;
 using VShop.Web.Services.Handlers;
 using VShop.Web.Services.Interfaces;
@@ -11,6 +12,7 @@ public static class DependencyInjectionConfig
     {
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<HttpClientAuthorizationDelegationHandler>();
+        services.AddScoped<IAspNetUser, AspNetUser>();
 
         services.AddHttpClient<IProductService, ProductService>("ProductApi", c =>
         {
@@ -22,11 +24,11 @@ public static class DependencyInjectionConfig
 
         services.AddHttpClient<ICartService, CartService>("CartApi",
             c => c.BaseAddress = new Uri(configuration["ServicesUri:CartApi"]))
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>();;
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>(); ;
 
         services.AddScoped<ICategoryService, CategoryService>();
-         services.AddScoped<IProductService, ProductService>();
-        // services.AddScoped<ICartService, CartService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ICartService, CartService>();
 
         return services;
     }

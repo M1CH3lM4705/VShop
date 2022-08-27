@@ -23,7 +23,6 @@ public class HomeController : Controller
 
     }
 
-    [Authorize]
     public async Task<ActionResult<ProductViewModel>> ProductDetails(int id)
     {
         var product = await _productService.FindProductById(id);
@@ -36,7 +35,7 @@ public class HomeController : Controller
     [HttpPost, ActionName("ProductDetails"), Authorize]
     public async Task<ActionResult<ProductViewModel>> ProductDetailsPost(ProductViewModel productVM)
     {
-        if(!ModelState.IsValid) return View(productVM);
+        // if(!ModelState.IsValid) return View(productVM);
 
         CartViewModel cart = new()
         {

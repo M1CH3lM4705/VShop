@@ -6,7 +6,7 @@ using VShop.Web.Services.Interfaces;
 
 namespace VShop.Web.Services;
 
-public class ProductService : IProductService
+public class ProductService : BaseService, IProductService
 {
     private readonly IHttpClientFactory _clientFactory;
     private const string apiEndpoint = "/api/products/";
@@ -24,20 +24,13 @@ public class ProductService : IProductService
     {
         var client = _clientFactory.CreateClient("ProductApi");
 
-        var content = new StringContent(JsonSerializer.Serialize(productVM),
-                        Encoding.UTF8, "application/json");
+        var content = ObterConteudo(productVM);
 
-        using(var response = await client.PostAsync(apiEndpoint, content))
-        {
-            if(response.IsSuccessStatusCode){
+        var response = await client.PostAsync(apiEndpoint, content);
 
-                var apiResponse = await response.Content.ReadAsStreamAsync();
-
-                productVM = await JsonSerializer
-                            .DeserializeAsync<ProductViewModel>(apiResponse, _options);
-            }
-        }
-        return productVM;
+        if(TratarErrosResponse(response)) return await DeserializarObjetoResponse<ProductViewModel>(response);
+        
+        return null;
     }
     public async Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
     {
