@@ -24,11 +24,16 @@ public static class DependencyInjectionConfig
 
         services.AddHttpClient<ICartService, CartService>("CartApi",
             c => c.BaseAddress = new Uri(configuration["ServicesUri:CartApi"]))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>();
+        
+        services.AddHttpClient<ICouponService, CouponService>("DiscountApi",
+            c => c.BaseAddress = new Uri(configuration["ServicesUri:DiscountApi"]))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegationHandler>(); ;
 
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICartService, CartService>();
+        services.AddScoped<ICouponService, CouponService>();
 
         return services;
     }

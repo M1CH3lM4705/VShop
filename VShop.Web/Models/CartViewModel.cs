@@ -7,9 +7,23 @@ public class CartViewModel
 
     internal void GetTotalAmount()
     {
-        foreach(var item in CartItems)
-        {
-            CartHeader.TotalAmount += item.GetPriceItems();
-        }
+        CartHeader.TotalAmount = CartItems.Sum(ci => ci.GetPriceItems());
+    }
+
+    internal bool TemItens()
+    {
+        return CartItems.Any();
+    }
+    internal void AddCoupon(string coupon)
+    {
+        CartHeader.CouponCode = coupon;
+    }
+    internal string GetCoupon()
+    {
+        return CartHeader.CouponCode;
+    }
+
+    internal void GetDiscount(){
+        CartHeader.GetTotalDiscount();
     }
 }

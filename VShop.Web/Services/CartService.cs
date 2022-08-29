@@ -57,4 +57,42 @@ public class CartService : BaseService, ICartService
         return await DeserializarObjetoResponse<bool>(response);
     }
 
+    public async Task<bool> ApplyCouponAsync(CartViewModel cartVM)
+    {
+        var client = _clientFactory.CreateClient("DiscountApi");
+
+        var content = ObterConteudo(cartVM);
+
+        var response = await client.PostAsync($"{apiEndpoint}/applycoupon", content);
+
+        TratarErrosResponse(response); 
+        
+        return await DeserializarObjetoResponse<bool>(response);
+
+
+    }
+
+    public async Task<bool> RemoveCouponAsync(string userId)
+    {
+        var client = _clientFactory.CreateClient("DiscountApi");
+
+        var response = await client.DeleteAsync($"{apiEndpoint}/{userId}");
+
+        TratarErrosResponse(response);
+
+        return await DeserializarObjetoResponse<bool>(response);
+    }
+
+    public async Task<CartHeaderViewModel> CheckoutAsync(CartHeaderViewModel cartHeader)
+    {
+        var client = _clientFactory.CreateClient("CartApi");
+
+        var content = ObterConteudo(cartHeader);
+
+        var response = await client.PostAsync($"{apiEndpoint}/checkout/", content);
+
+        if(!TratarErrosResponse(response)) return await DeserializarObjetoResponse<CartHeaderViewModel>(response);
+
+        return null;
+    }
 }

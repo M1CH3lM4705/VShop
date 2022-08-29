@@ -9,9 +9,9 @@ public interface ICartService
     Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM);
     Task<bool> RemoveItemFromCartAsync(int cartId);
 
-    // Task<bool> ApplyCouponAsync(CartViewModel cartVM, string couponCode);
-    // Task<bool> RemoveCouponAsync(string userId);
+    Task<bool> ApplyCouponAsync(CartViewModel cartVM);
+    Task<bool> RemoveCouponAsync(string userId);
     // Task<bool> ClearCartAsync(string userId);
 
-    // Task<CartViewModel> CheckoutAsync(CartHeaderViewModel cartHeader);
+    Task<CartHeaderViewModel> CheckoutAsync(CartHeaderViewModel cartHeader);
 }

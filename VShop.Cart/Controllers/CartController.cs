@@ -51,5 +51,44 @@ namespace VShop.Cart.Controllers
             if(!status) return BadRequest();
             return Ok(status);
         }
+
+        [HttpPost("applycoupon")]
+        public async Task<ActionResult<CartDTO>> ApplyCoupon(CartDTO cartDTO)
+        {
+            var result = await _repository.ApplyCouponAsync(cartDTO.CartHeader.UserId,
+                                                            cartDTO.CartHeader.CouponCode);
+            
+            if(!result)
+                return NotFound($"CartHeader not found for userId = {cartDTO.CartHeader.UserId}");
+
+            return Ok(result);
+        }
+
+        [HttpDelete("deletecoupon/{userId}")]
+        public async Task<ActionResult<CartDTO>> DeleteCoupon(string userId)
+        {
+            var result = await _repository.DeleteCouponAsync(userId);
+
+            if(!result)
+                return NotFound($"Cupom de Desconto não encontrado para este usúario {userId}");
+            
+            return Ok(result);
+        }
+
+        [HttpPost("checkout")]
+        public async Task<ActionResult<CheckoutHeaderDTO>> Checout(CheckoutHeaderDTO checkoutDto)
+        {
+            var cart = await _repository.GetCartByUserIdAsync(checkoutDto.UserId);
+
+            if(cart is null)
+            {
+                return NotFound($"Nenhum carrinho foi encontrado para {checkoutDto.UserId}");
+            }
+
+            checkoutDto.CartItems = cart.CartItems;
+            checkoutDto.Cliente.DataAtual = DateTime.Now;
+
+            return Ok(checkoutDto);
+        }
     }
 }
