@@ -76,7 +76,7 @@ namespace VShop.Cart.Controllers
         }
 
         [HttpPost("checkout")]
-        public async Task<ActionResult<CheckoutHeaderDTO>> Checout(CheckoutHeaderDTO checkoutDto)
+        public async Task<ActionResult<CheckoutHeaderDTO>> Checkout(CheckoutHeaderDTO checkoutDto)
         {
             var cart = await _repository.GetCartByUserIdAsync(checkoutDto.UserId);
 

@@ -78,9 +78,14 @@ namespace VShop.Web.Controllers
             {
                 var resutl = await _cartService.CheckoutAsync(cartVM.CartHeader);
 
-                if(resutl is not null) return RedirectToAction(nameof(ChekcoutCompleted));
+                if(resutl is not null) return RedirectToAction(nameof(CheckoutCompleted));
             }
             return View(cartVM);
+        }
+
+        public IActionResult CheckoutCompleted()
+        {
+            return View();
         }
 
         private async Task<CartViewModel> GetCartByUser()
